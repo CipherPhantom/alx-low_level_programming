@@ -19,7 +19,7 @@ int main(void)
 
 			while (k < 10)
 			{
-				int l = 0
+				int l = 0;
 
 				while (l < 10)
 				{
