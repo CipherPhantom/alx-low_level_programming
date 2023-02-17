@@ -6,12 +6,15 @@
 */
 int main(void)
 {
-	for (int i = 0; i < 16; i++)
+	int i = 0;
+
+	while (i < 16)
 	{
 		if (i > 9)
 			putchar('a' + i % 10);
 		else
 			putchar(i + '0');
+		i++;
 	}
 
 	putchar('\n');
