@@ -7,13 +7,21 @@
 
 int main(void)
 {
-	for (int i = 0; i < 10; i++)
+	int i = 0;
+
+	while (i < 10)
 	{
-		for (int j = 0; j < 10; j++)
+		int j = 0;
+
+		while (j < 10)
 		{
-			for (int k = 0; k < 10; k++)
+			int k = 0;
+
+			while (k < 10)
 			{
-				for (int l = 0; l < 10; l++)
+				int l = 0
+
+				while (l < 10)
 				{
 					if (i * 10 + j < k * 10 + l)
 					{
@@ -29,9 +37,13 @@ int main(void)
 							putchar(' ');
 						}
 					}
+				l++;
 				}
+			k++;
 			}
+		j++;
 		}
+	i++;
 	}
 
 	putchar('\n');

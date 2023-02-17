@@ -8,14 +8,18 @@
 int main(void)
 {
 	int x = 1;
+	int i = 0;
 
-	for (int i = 0; i < 8; i++)
+	while (i < 8)
 	{
 		int y = 2;
+		int j = x;
 
-		for (int j = x; j < 9; j++)
+		while (j < 9)
 		{
-			for (int k = y; k < 10; k++)
+			int k = y;
+
+			while (k < 10)
 			{
 				if (k > j)
 				{
@@ -28,9 +32,12 @@ int main(void)
 						putchar(' ');
 					}
 				}
+				k++;
 			}
+			j++;
 			y++;
 		}
+		i++;
 		x++;
 	}
 
