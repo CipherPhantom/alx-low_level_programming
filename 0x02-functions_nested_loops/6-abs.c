@@ -5,8 +5,6 @@
  * @int: Any integer
  * Return: Absolute Number
  */
-int _abs(int);
-
 int _abs(int n)
 {
 	if (n < 0)
