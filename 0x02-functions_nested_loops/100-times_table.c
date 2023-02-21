@@ -30,8 +30,6 @@ void print_int_times_table(int n, int m)
 			_putchar((n * m) % 10 + '0');
 		}
 	}
-	else
-		_putchar(0 + '0');
 }
 
 
@@ -50,7 +48,10 @@ void print_times_table(int d)
 
 		while (m <= d)
 		{
-			print_int_times_table(n, m);
+			if (m == 0)
+				_putchar(0 + '0');
+			else
+				print_int_times_table(n, m);
 			m++;
 		}
 		_putchar('\n');
