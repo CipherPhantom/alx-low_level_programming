@@ -1,26 +1,34 @@
 #include "main.h"
 
-/**
- * two_digit_to_char - Prints two digit number
- * @t: two digit number
- */
-void two_digit_to_char(int t)
-{
-	_putchar(t / 10 + '0');
-	_putchar(t % 10 + '0');
-}
 
 /**
- * three_digit_to_char - Prints three digit number
- * @t: three digit number
+ * display_integer - prints integer
+ * @d: the integer
  */
-void three_digit_to_char(int t)
-{
-	_putchar(t / 100 + '0');
-	_putchar(t / 10 + '0');
-	_putchar(t % 10 + '0');
-}
 
+void display_integer(int d)
+{
+	if (d < 10)
+	{
+		_putchar(d + '0');
+	}
+	else if (d < 100)
+	{
+		_putchar(d / 10 + '0');
+		_putchar(d % 10 + '0');
+
+	}
+	else
+	{
+		_putchar(d / 100 + '0');
+		_putchar(d / 10 + '0');
+		_putchar(d % 10 + '0');
+	}
+
+	_putchar(',');
+	_putchar(' ');
+
+}
 /**
  * print_to_98 - Prints all natural numbers from n to 98
  * @n: Starting integer
@@ -28,36 +36,23 @@ void three_digit_to_char(int t)
 
 void print_to_98(int n)
 {
+	while (n > 98)
+	{
+		display_integer(n);
+		n--;
+	}
+
 	while (n < 98)
 	{
 		int m = n;
 
-		if (m < 0)
+		if (n < 0)
 		{
 			m *= -1;
 			_putchar('-');
 		}
-		if (m < 10)
-		{
-			_putchar(m + '0');
-		}
-		else
-		{
-			two_digit_to_char(m);
-		}
-		_putchar(',');
-		_putchar(' ');
+		diplay_integer(m);
 		n++;
-	}
-	while (n > 98)
-	{
-		if (n > 99)
-			three_digit_to_char(n);
-		else
-			two_digit_to_char(n);
-		_putchar(',');
-		_putchar(' ');
-		n--;
 	}
 	two_digit_to_char(98);
 	_putchar('\n');
