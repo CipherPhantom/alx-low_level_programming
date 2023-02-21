@@ -8,12 +8,12 @@
 
 int main(void)
 {
-	unsigned long n, m = 1, next_term = 1;
+	unsigned long int n, m = 1, next_term = 1;
 	int i = 0;
 
 	while (i < 98)
 	{
-		printf("%ld", next_term);
+		printf("%lu", next_term);
 		n = m;
 		m = next_term;
 		next_term = n + m;

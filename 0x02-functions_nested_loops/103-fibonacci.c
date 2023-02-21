@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	unsigned long int n, m = 1, next_term = 1, sum;
+	unsigned long int n, m = 1, next_term = 1, sum = 0;
 
 	while (next_term < 4000000)
 	{
@@ -16,7 +16,7 @@ int main(void)
 		m = next_term;
 		next_term = n + m;
 		if (next_term % 2 == 0 && next_term < 4000000)
-		{	
+		{
 			sum += next_term;
 		}
 	}
