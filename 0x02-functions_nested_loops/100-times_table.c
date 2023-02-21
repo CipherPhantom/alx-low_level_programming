@@ -18,7 +18,7 @@ void print_int_times_table(int n, int m)
 			_putchar(n * m + '0');
 		}
 		else if (n * m < 100)
-		{i
+		{
 			_putchar(' ');
 			_putchar((n * m) / 10 + '0');
 			_putchar((n * m) % 10 + '0');

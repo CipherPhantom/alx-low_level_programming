@@ -18,8 +18,11 @@ int main(void)
 		m = next_term;
 		next_term = n + m;
 		if (i < 49)
+		{
 			printf(", ");
+		}
 		i++;
 	}
 	printf("\n");
+	return (0);
 }

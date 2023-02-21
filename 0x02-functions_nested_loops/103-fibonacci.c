@@ -19,4 +19,5 @@ int main(void)
 			sum += next_term;
 	}
 	printf("%ld\n", next_term);
+	return (0);
 }
