@@ -24,10 +24,6 @@ void display_integer(int d)
 		_putchar(d / 10 + '0');
 		_putchar(d % 10 + '0');
 	}
-
-	_putchar(',');
-	_putchar(' ');
-
 }
 /**
  * print_to_98 - Prints all natural numbers from n to 98
@@ -39,6 +35,8 @@ void print_to_98(int n)
 	while (n > 98)
 	{
 		display_integer(n);
+		_putchar(',');
+		_putchar(' ');
 		n--;
 	}
 
@@ -52,6 +50,8 @@ void print_to_98(int n)
 			_putchar('-');
 		}
 		display_integer(m);
+		_putchar(',');
+		_putchar(' ');	
 		n++;
 	}
 	display_integer(98);
