@@ -51,7 +51,7 @@ void print_to_98(int n)
 		}
 		display_integer(m);
 		_putchar(',');
-		_putchar(' ');	
+		_putchar(' ');
 		n++;
 	}
 	display_integer(98);
