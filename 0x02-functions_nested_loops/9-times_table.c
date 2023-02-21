@@ -27,11 +27,12 @@ void times_table(void)
 			{
 				_putchar(',');
 				_putchar(' ');
-				_putchar(' ');
+				if (n * m < 10)
+					_putchar(' ');
 			}
 			m++;
 		}
-		putchar('\n');
+		_putchar('\n');
 		n++;
 	}
 }
