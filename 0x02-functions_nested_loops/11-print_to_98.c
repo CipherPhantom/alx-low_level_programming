@@ -60,5 +60,5 @@ void print_to_98(int n)
 		n--;
 	}
 	two_digit_to_char(98);
-	_puchar('\n');
+	_putchar('\n');
 }
