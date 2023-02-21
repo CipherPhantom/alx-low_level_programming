@@ -21,7 +21,7 @@ void display_integer(int d)
 	else
 	{
 		_putchar(d / 100 + '0');
-		_putchar(d / 10 + '0');
+		_putchar((d - 100) / 10 + '0');
 		_putchar(d % 10 + '0');
 	}
 }
