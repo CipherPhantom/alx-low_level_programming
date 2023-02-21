@@ -15,9 +15,11 @@ int main(void)
 		n = m;
 		m = next_term;
 		next_term = n + m;
-		if (next_term % 2 == 0)
+		if (next_term % 2 == 0 && next_term < 4000000)
+		{	
 			sum += next_term;
+		}
 	}
-	printf("%ld\n", next_term);
+	printf("%ld\n", sum);
 	return (0);
 }
