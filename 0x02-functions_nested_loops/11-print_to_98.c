@@ -54,6 +54,6 @@ void print_to_98(int n)
 		diplay_integer(m);
 		n++;
 	}
-	two_digit_to_char(98);
+	display_integer(98);
 	_putchar('\n');
 }
