@@ -12,7 +12,7 @@ void print_number(int n)
 	if (i < 0)
 	{
 		_putchar('-');
-		i *= -1
+		i *= -1;
 	}
 	int th = i / 1000;
 	int h = (i - (th * 1000)) / 100;
