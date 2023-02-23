@@ -25,6 +25,6 @@ void print_number(int n)
 	else if (th > 0 || h > 0 || t > 0)
 		_putchar(t + '0');
 	else
-		break;
+		int j;
 	_putchar(i % 10);
 }
