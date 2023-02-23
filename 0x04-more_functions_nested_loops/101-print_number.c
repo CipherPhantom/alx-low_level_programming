@@ -22,7 +22,7 @@ void print_number(int n)
 		_putchar(d / 10 + '0');
 		_putchar(d % 10 + '0');
 	}
-	else if (n < 1000)
+	else if (d < 1000)
 	{
 		_putchar(d / 100 + '0');
 		_putchar((d - ((d / 100) * 100)) / 10 + '0');
