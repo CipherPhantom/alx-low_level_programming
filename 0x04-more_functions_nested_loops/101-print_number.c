@@ -7,25 +7,30 @@
 
 void print_number(int n)
 {
-	int d = n;
-
-	if (d < 0)
+	if (n < 0)
 	{
 		_putchar('-');
-		d *= -1;
+		n *= -1;
 	}
 
-	int th = d / 1000;
-	int h = (d - (th * 1000)) / 100;
-	int t = (d - (th * 1000 + h * 100)) / 10;
-	int u = d % 10;
-
-	if (th > 0)
-		_putchar(th + '0');
-	if (th > 0 || h > 0)
-		_putchar(h + '0');
-	if (th > 0 || h > 0 || t > 0)
-		_putchar(t + '0');
-	_putchar(u + '0');
-
+	if (n < 10)
+		_putchar(n + '0');
+	else if (n < 100)
+	{
+		_putchar(n / 10 + '0');
+		_putchar(n % 10 + '0');
+	}
+	else if (n < 1000)
+	{
+		_putchar(n / 100 + '0');
+		_putchar((n - ((n / 100) * 100)) / 10 + '0');
+		_putchar(n % 10 + '0');
+	}
+	else
+	{
+		_putchar(n / 1000 + '0');
+		_putchar((n - ((n / 1000) * 1000)) / 100 + '0');
+		_putchar((n - ((n / 100) * 100)) / 10 + '0');
+		_putchar(n % 10 + '0');
+	}
 }
