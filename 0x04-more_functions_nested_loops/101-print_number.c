@@ -24,5 +24,7 @@ void print_number(int n)
 		_putchar(h + '0');
 	else if (th > 0 || h > 0 || t > 0)
 		_putchar(t + '0');
+	else
+		break;
 	_putchar(i % 10);
 }

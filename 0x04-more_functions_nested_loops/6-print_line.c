@@ -8,14 +8,14 @@
 void print_line(int n)
 {
 	if (n <= 0)
-		continue;
+		_putchar('\n');
 	else
 	{
 		while (n > 0)
 		{
 			_putchar('_');
+			_putchar('\n');
 			n--;
 		}
 	}
-	_putchar('\n');
 }
