@@ -8,13 +8,29 @@
 
 int main(void)
 {
-	unsigned int i = 1, factor = 0;
+	unsigned long int num = 612852475143, CurrMaxPrime = 0;
+	unsigned long int i = 3;
 
-	while (i < 612852475143)
+	if (num % 2 == 0)
 	{
-		if (612852475143 % i == 0)
-			factor = i;
-		i++;
+		CurrMaxPrime = 2;
+		while (num % 2 == 0)
+		{
+			num = num / 2;
+		}
 	}
+	while (i <= num * 0.5)
+	{
+		while (num % i == 0)
+		{
+			CurrMaxPrime = i;
+			num = num / i;
+		}
+		i += 2;
+	}
+
+	if (num > 2)
+		CurrMaxPrime = num;
+
 	return (0);
 }
