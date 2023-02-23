@@ -26,9 +26,17 @@ void print_number(int n)
 		_putchar((n - ((n / 100) * 100)) / 10 + '0');
 		_putchar(n % 10 + '0');
 	}
-	else
+	else if (n < 10000)
 	{
 		_putchar(n / 1000 + '0');
+		_putchar((n - ((n / 1000) * 1000)) / 100 + '0');
+		_putchar((n - ((n / 100) * 100)) / 10 + '0');
+		_putchar(n % 10 + '0');
+	}
+	else
+	{
+		_putchar(n / 10000);
+		_putchar((n - ((n / 10000) * 10000)) / 1000 + '0');
 		_putchar((n - ((n / 1000) * 1000)) / 100 + '0');
 		_putchar((n - ((n / 100) * 100)) / 10 + '0');
 		_putchar(n % 10 + '0');
