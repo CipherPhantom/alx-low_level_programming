@@ -20,11 +20,9 @@ void print_number(int n)
 
 	if (th > 0)
 		_putchar(th + '0');
-	else if (th > 0 || h > 0)
+	if (th > 0 || h > 0)
 		_putchar(h + '0');
-	else if (th > 0 || h > 0 || t > 0)
+	if (th > 0 || h > 0 || t > 0)
 		_putchar(t + '0');
-	else
-		int j;
 	_putchar(i % 10);
 }
