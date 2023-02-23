@@ -8,7 +8,8 @@
 
 int main(void)
 {
-	unsigned long int num = 612852475143, CurrMaxPrime = 0;
+	unsigned long int num = 612852475143;
+	int CurrMaxPrime = 0;
 	unsigned long int i = 3;
 
 	if (num % 2 == 0)
@@ -32,5 +33,6 @@ int main(void)
 	if (num > 2)
 		CurrMaxPrime = num;
 
+	printf("%d\n", CurrMaxPrime);
 	return (0);
 }
