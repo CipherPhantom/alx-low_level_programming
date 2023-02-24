@@ -7,41 +7,38 @@
 
 void print_number(int n)
 {
-	unsigned int m; /* power of 10 */
-	int c; /* boolean check */
-	unsigned int num; /* convert int to long */
-
-	num = n;
-	/* negatives */
-	if (num < 0)
+	if (n < 0)
 	{
-		num *= -1;
 		_putchar('-');
+		n *= -1;
 	}
 
-	/* count up */
-	m = 1;
-	c = 1;
-	while (c)
+	if (n < 10)
+		_putchar(n + '0');
+	else if (n < 100)
 	{
-		if (num / (m * 10) > 0)
-			m *= 10;
-		else
-			c = 0;
+		_putchar(n / 10 + '0');
+		_putchar(n % 10 + '0');
 	}
-
-	/* count down */
-	while (num >= 0)
+	else if (n < 1000)
 	{
-		if (m == 1)
-		{
-			_putchar(num % 10 + '0');
-			num = -1;
-		}
-		else
-		{
-			_putchar((num / m % 10) + '0');
-			m /= 10;
-		}
+		_putchar(n / 100 + '0');
+		_putchar((n - ((n / 100) * 100)) / 10 + '0');
+		_putchar(n % 10 + '0');
+	}
+	else if (n < 10000)
+	{
+		_putchar(n / 1000 + '0');
+		_putchar((n - ((n / 1000) * 1000)) / 100 + '0');
+		_putchar((n - ((n / 100) * 100)) / 10 + '0');
+		_putchar(n % 10 + '0');
+	}
+	else
+	{
+		_putchar(n / 10000);
+		_putchar((n - ((n / 10000) * 10000)) / 1000 + '0');
+		_putchar((n - ((n / 1000) * 1000)) / 100 + '0');
+		_putchar((n - ((n / 100) * 100)) / 10 + '0');
+		_putchar(n % 10 + '0');
 	}
 }
