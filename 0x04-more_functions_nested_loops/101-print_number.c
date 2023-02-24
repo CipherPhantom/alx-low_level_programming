@@ -1,4 +1,5 @@
 #include "main.h"
+#include <math.h>
 
 /**
  * print_number - Prints an integer.
@@ -11,7 +12,7 @@ void print_number(int n)
 
 	if (d < 0)
 	{
-		putchar('-');
+		_putchar('-');
 		d *= -1;
 	}
 
@@ -34,7 +35,7 @@ void print_number(int n)
 		{
 			unsigned int t = pow(10, p);
 
-			putchar((d / t) % 10 + '0');
+			_putchar((d / t) % 10 + '0');
 			p--;
 		}
 }
