@@ -29,7 +29,7 @@ int _strlen(char *s)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0, n = _strlen(src);
+	int i = 0;
 
 	while (*(src + i) != '\0')
 	{

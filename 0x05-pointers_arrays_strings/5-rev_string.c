@@ -25,9 +25,9 @@ int _strlen(char *s)
  */
 void rev_string(char *s)
 {
-	int len = _strlen(s);
+	const int len = _strlen(s);
 	int i = 0, j = len, k = 0;
-	char n[len], *l, c;
+	char n[len], c;
 
 	while (j)
 	{
