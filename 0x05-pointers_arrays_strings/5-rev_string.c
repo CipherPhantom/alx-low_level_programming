@@ -26,20 +26,18 @@ int _strlen(char *s)
 void rev_string(char *s)
 {
 	int len = _strlen(s);
-	int i = 0, j = len;
-	char *n;
+	int i = 0, j = len, k = 0;
+	char *n, *l, c;
 
 	while (j)
 	{
-		char c = *(s + j - 1);
-		char *l = (n + i);
+		c = *(s + j - 1);
+		l = (n + i);
 
 		*l = c;
 		i++;
 		j--;
 	}
-
-	int k;
 
 	while (k < len)
 	{
