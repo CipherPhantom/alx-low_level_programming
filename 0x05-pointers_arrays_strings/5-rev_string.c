@@ -27,24 +27,21 @@ void rev_string(char *s)
 {
 	int len = _strlen(s);
 	int i = 0, j = len, k = 0;
-	char *n, *l, c;
+	char n[len], *l, c;
 
 	while (j)
 	{
 		c = *(s + j - 1);
-		l = (n + i);
-
-		*l = c;
+		n[i] = c;
 		i++;
 		j--;
 	}
 
 	while (k < len)
 	{
-		char c = *(n + k);
 		char *l = (s + k);
 
-		*l = c;
+		*l = n[k];
 		k++;
 	}
 }

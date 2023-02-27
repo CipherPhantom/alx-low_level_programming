@@ -31,7 +31,7 @@ char *_strcpy(char *dest, char *src)
 {
 	int i = 0, n = _strlen(src);
 
-	while (i < n && src[i] != '\0')
+	while (*(src + i) != '\0')
 	{
 		dest[i] = src[i];
 		i++;
