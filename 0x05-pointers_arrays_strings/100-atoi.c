@@ -52,7 +52,7 @@ int _atoi(char *s)
 		{
 			char *str = s + i;
 
-			while (*(str + 1) && *(str + 1) >= 48 && *(str + 1) <= 57 &&)
+			while (*(str + 1) && *(str + 1) >= 48 && *(str + 1) <= 57)
 			{
 				n *= 10;
 				str++;
