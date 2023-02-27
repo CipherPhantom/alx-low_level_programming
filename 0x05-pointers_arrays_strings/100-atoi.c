@@ -34,8 +34,8 @@ int change_state(char *s, int num)
 int _atoi(char *s)
 {
 	int state = 1;
-	unsigned int num = 0, len = 0;
-	int i = 0, sign = 1;
+	unsigned int num = 0;
+	int i = 0, sign = 1, len = 0;
 
 	while (s[len] != '\0')
 		len++;
