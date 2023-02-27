@@ -28,7 +28,7 @@ void rev_string(char *s)
 {
 	const int len = _strlen(s);
 	int i = 0, j = len, k = 0;
-	char *n = (char*)malloc(len*sizeof(char)), c;
+	char *n = (char *)malloc(len * sizeof(char)), c;
 
 	while (j)
 	{
