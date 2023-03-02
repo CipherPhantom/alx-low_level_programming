@@ -1,40 +1,24 @@
-#include "mian.h"
-
+#include "main.h"
 
 /**
- * print_number - Prints an integer.
- * @n: Integer
+ * print_number - prints an integer;
+ * @n: integer to be printed;
  */
 void print_number(int n)
 {
-	int num = n, pow = 0, m = 10;
-	int digit = 0;
+	unsigned int n1;
 
-	if (num < 0)
+	if (n < 0)
 	{
-		num *= -1;
-		_putchar("-");
-	}
-	while (num / m != 0)
+		n1 = -n;
+		_putchar('-');
+	} else
 	{
-		pow++;
-		m *= 10;
+		n1 = n;
 	}
 
-	m = 1;
-	while (pow >= 0)
-	{
-		int i = 0;
+	if (n1 / 10)
+		print_number(n1 / 10);
 
-		num = num - digit * m;
-		m = 1;
-		while (i < pow)
-		{
-			m *= 10;
-			i++;
-		}
-		digit = num / m;
-		_putchar(digit + '0');
-		pow--;
-	}
+	_putchar((n1 % 10) + '0');
 }

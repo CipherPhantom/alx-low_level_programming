@@ -1,5 +1,4 @@
 #include "main.h"
-#include <ctype.h>
 
 /**
  * _strlen - Finds the length of string
@@ -30,7 +29,10 @@ char *cap_string(char *s)
 {
 	int len = _strlen(s);
 	int i = 0;
-	char seps[] = {',', ';', '.', '!', '?', "\"", '(', ')', '(', '{', '}'};
+	char seps[] = {
+		',', ';', '.', '!', '?',
+		"\"", '(', ')', '{',
+		'}', '\t', ' ', '\n'};
 	int sep_len = _strlen(seps);
 
 	while (i < len)

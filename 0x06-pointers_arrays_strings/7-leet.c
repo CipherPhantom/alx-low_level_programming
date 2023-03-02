@@ -1,50 +1,31 @@
 #include "main.h"
 
 /**
- * _strlen - Finds the length of string
- * @s: pointer
+ * leet - encodes a string in 1337
+ * @s: string to be encoded
  *
- * Return: Length of string
- */
-int _strlen(char *s)
-{
-	char *str = s;
-	int len = 0;
-
-	while (*str)
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
-
-/**
- * leet- Encodes a string into 1337..
- * @s: Pointer
- *
- * Return: leet encoded string
+ * Return: the resulting string;
  */
 char *leet(char *s)
 {
-	char lower[] = {'a', 'e', 'o', 't', 'l'};
-	char upper[] = {'A', 'E', 'O', 'T', 'L'};
-	char num[] = {'4', '3', '0', '7', '1'};
-	int len = _strlen(s);
-	int i = 0;
+	int i = 0, j;
 
-	while (i < len)
+	char *a = "aAeEoOtTlL";
+	char *b = "4433007711";
+
+	while (s[i] != '\0')
 	{
-		char c = s[i];
-		int j = 0;
-
-		while (j < 5)
+		j = 0;
+		while (j < 10)
 		{
-			if (c == lower[j] || c == upper[j])
-				s[i] = num[j];
+			if (s[i] == a[j])
+			{
+				s[i] = b[j];
+			}
 			j++;
 		}
 		i++;
 	}
+
 	return (s);
 }

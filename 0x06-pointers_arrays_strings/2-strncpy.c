@@ -39,7 +39,10 @@ char *_strncpy(char *dest, char *src, int n)
 		*loc = src[i];
 		i++;
 	}
-	if (i == src_len)
+	while (i < n)
+	{
 		dest[i] = '\0';
+		i++;
+	}
 	return (dest);
 }
