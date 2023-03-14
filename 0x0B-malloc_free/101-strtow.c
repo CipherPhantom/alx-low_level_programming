@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
 
@@ -30,12 +31,12 @@ char **words2D(char *s)
 {
 	int i = 0, len, j = 0;
 	int numOfWords = wordCount(s);
-	char **words = (char **)malloc(sizeof(char *) * numOfWords + 1);
+	char **words = (char **)malloc(sizeof(char *) * (numOfWords + 1));
 
-	while (s[i] != '\0')
+	while (s[i] != '\0' && j < numOfWords)
 	{
 		len = 0;
-		while (s[i] != ' ')
+		while (s[i] != ' ' && s[i] != '\0')
 		{
 			len += 1;
 			i++;
@@ -58,7 +59,7 @@ char **words2D(char *s)
  */
 char **strtow(char *str)
 {
-	int i, j, k;
+	int i, j, k, len = strlen(str);
 	char **words;
 
 	if (str == NULL || *str == '\0')
@@ -66,10 +67,10 @@ char **strtow(char *str)
 	words = words2D(str);
 	i = 0;
 	k = 0;
-	while (str[k] != '\0')
+	while (str[k] != '\0' && k < len)
 	{
 		j = 0;
-		while (str[k] != ' ')
+		while (str[k] != ' ' && str[k] != '\0')
 		{
 			words[i][j] = str[k];
 			k++;
