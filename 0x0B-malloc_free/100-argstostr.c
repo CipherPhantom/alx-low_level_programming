@@ -24,7 +24,7 @@ char *argstostr(int ac, char **av)
 		len += 1;
 		i++;
 	}
-	args = (char *)malloc(sizeof(char) * len);
+	args = (char *)malloc(sizeof(char) * (len + 1));
 	for (i = 0; av[i]; i++)
 	{
 		for (j = 0; av[i][j]; j++)
@@ -35,6 +35,5 @@ char *argstostr(int ac, char **av)
 		args[k] = '\n';
 		k++;
 	}
-	args[k] = '\0';
 	return (args);
 }
