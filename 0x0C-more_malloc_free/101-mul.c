@@ -4,54 +4,14 @@
 #include <string.h>
 
 /**
- * main - Multiplies two positive numbers.
- * @argc: Argument Counter.
- * @argv: Argumnet Vector.
- *
- * Return: Value.
+ * errors - handles errors for main
  */
-int main(int argc, char **argv)
+void errors(void)
 {
-	int i, j, tmp, l1, l2;
-	char *num1, *num2;
-	int *a, *b, *ans;
-
-	if (argc == 3)
-	{
-		num1 = argv[1];
-		num2 = argv[2];
-		if (!(all_digits(num1) && all_digits(num2)))
-		{
-			printf("Error\n");
-			exit(98);
-		}
-		l1 = strlen(num1);
-		l2 = strlen(num2);
-		a = malloc(sizeof(int) * l1);
-		b = malloc(sizeof(int) * l2);
-		ans = malloc(sizeof(int) * max(l1, l2) * 2);
-		for (i = l1 - 1, j = 0; i >= 0; i--, j++)
-			a[j] = num1[i] - '0';
-		for (i = l2 - 1, j = 0; i >= 0; i--, j++)
-			b[j] = num2[i] - '0';
-		for (i = 0; i < l2; i++)
-		{
-			for (j = 0; j < l1; j++)
-				ans[i + j] += b[i] * a[j];
-		}
-		for (i = 0; i < l1 + l2; i++)
-		{
-			tmp = ans[i] / 10;
-			ans[i] = ans[i] % 10;
-			ans[i + 1] = ans[i + 1] + tmp;
-		}
-		print_array(ans, l1 + l2);
-		exit(0);
-	}
 	printf("Error\n");
 	exit(98);
-	return (0);
 }
+
 /**
  * all_digits - Checks if all the characters in a string are digits.
  * @s: string pointer.
@@ -69,36 +29,55 @@ int all_digits(char *s)
 	}
 	return (1);
 }
+
 /**
- * max - Maximum of two digits.
- * @x: first digit.
- * @y: second digit.
+ * main - Multiplies two positive numbers.
+ * @argc: Argument Counter.
+ * @argv: Argumnet Vector.
  *
- * Return: Larger digit.
+ * Return: Value.
  */
-int max(int x, int y)
+int main(int argc, char **argv)
 {
-	if (x > y)
-		return (x);
-	else
-		return (y);
-}
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
 
-/**
- * print_array - Print array of numbers.
- * @a: array.
- * @l: length of array.
- */
-void print_array(int *a, int l)
-{
-	int i;
-
-	for (i = l; i >= 0; i--)
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !all_digits(s1) || !all_digits(s2))
+		errors();
+	len1 = strlen(s1);
+	len2 = strlen(s2);
+	len = len1 + len2 + 1;
+	result = malloc(sizeof(int) * len);
+	if (!result)
+		return (1);
+	for (i = 0; i <= len1 + len2; i++)
+		result[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		if (a[i] > 0)
-			break;
+		digit1 = s1[len1] - '0';
+		carry = 0;
+		for (len2 = strlen(s2) - 1; len2 >= 0; len2--)
+		{
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
+		}
+		if (carry > 0)
+			result[len1 + len2 + 1] += carry;
 	}
-	for (; i >= 0; i--)
-		printf("%d", a[i]);
-	printf("\n");
+	for (i = 0; i < len - 1; i++)
+	{
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
+	}
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(result);
+	return (0);
 }
+
