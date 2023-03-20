@@ -18,8 +18,8 @@ dog_t *new_dog(char *name, float age, char *owner)
 
 	dog_n = malloc(sizeof(struct dog));
 	name_n = malloc(sizeof(name));
-	owner_n = malloc( sizeof(owner));
-	if (!owner_n || !name_n || !dog_n)
+	owner_n = malloc(sizeof(owner));
+	if (!dog_n)
 		return (NULL);
 	for (i = 0; name[i]; i++)
 		name_n[i] = name[i];
