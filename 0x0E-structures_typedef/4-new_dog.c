@@ -25,6 +25,8 @@ dog_t *new_dog(char *name, float age, char *owner)
 		name_n[i] = name[i];
 	for (i = 0; owner[i]; i++)
 		owner_n[i] = owner[i];
+	if (age <= 0.0)
+		age = 0;
 	dog_n->name = name_n;
 	dog_n->age = age;
 	dog_n->owner = owner_n;
