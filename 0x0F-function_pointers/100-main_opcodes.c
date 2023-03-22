@@ -1,23 +1,41 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main( )
+/**
+ * main - prints the opcodes of its own main function.
+ * @argc - Argument Counter
+ * @argv - Argument Vector
+ * Return: Always 0 (Success)
+ */
+int main(int argc, char *argv[])
 {
-    __asm__
-    (
-        "sub $0x10, %esp;\n"
-        "movl $0x0, 0x0(%esp);\n"
-        "lea message, %eax;\n"
-        "movl %eax, 0x4(%esp);\n"
-        "lea title, %eax;\n"
-        "movl %eax, 0x8(%esp);\n"
-        "movl $0x00000040, 0xc(%esp);\n"
-        "call _MessageBoxA@16;\n"
-        "movl $0, %eax;\n"
-        "ret;\n"
+	int bytes, i;
+	char *arr;
 
-        "message: .ascii \"C and assembly are for real men.\\n\\0\";"
-        "title: .ascii \"Made by CaptainObvious!\\n\\0\";"
-    );
+	if (argc != 2)
+	{
+		printf("Error\n");
+		exit(1);
+	}
 
-    return 0;
+	bytes = atoi(argv[1]);
+
+	if (bytes < 0)
+	{
+		printf("Error\n");
+		exit(2);
+	}
+
+	arr = (char *)main;
+	
+	for (i = 0; i < bytes; i++)
+	{
+		if (i == bytes - 1)
+		{
+			printf("%02hhx\n", arr[i]);
+			break;
+		}
+		printf("%02hhx ", arr[i]);
+	}
+	return (0);
 }
