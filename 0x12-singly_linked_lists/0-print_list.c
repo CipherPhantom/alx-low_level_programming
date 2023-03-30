@@ -9,15 +9,15 @@
 size_t print_list(const list_t *h)
 {
 	size_t n = 0;
-	list_t *temp = NULL;
+	const list_t *temp;
 	int len;
 	char *str;
 
 	if (h == NULL)
 		return (n);
 
-	*temp = *h;
-	while (temp->next)
+	temp = h;
+	while (temp)
 	{
 		len = temp->len;
 		str = temp->str;
@@ -27,8 +27,8 @@ size_t print_list(const list_t *h)
 			len = 0;
 		}
 		printf("[%u] %s\n", len, str);
-		n++;
 		temp = temp->next;
+		n++;
 	}
 	return (n);
 }
