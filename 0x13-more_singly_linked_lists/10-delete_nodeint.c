@@ -27,7 +27,8 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 }
 
 /**
- * delete_nodeint_at_index - Deletes the node at index index of a listint_t linked list.
+ * delete_nodeint_at_index - Deletes the node at index index
+ * of a listint_t linked list.
  * @head: Pointer to the head pointer of listint_t list
  * @index: Index
  *
@@ -43,7 +44,7 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	tmp = get_nodeint_at_index(*head, index);
 	if (!tmp)
 		return (-1);
-	
+
 	if (index == 0)
 		*head = tmp->next;
 	else
