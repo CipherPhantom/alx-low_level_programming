@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
@@ -36,16 +36,10 @@ int main(int argc, char *argv[])
 		fp1_to = write(fp_to, str, 1024);
 		if (fp1_to == -1)
 			file_to_error(file_to);
-	}
-	while (fp1_from);
+	} while (fp1_from > 0);
 
-	fp2_from = close(fp_from);
-	if (fp2_from == -1)
-		close_error(fp_from);
-
-	fp2_to = close(fp_to);
-	if (fp2_to == -1)
-		close_error(fp_to);
+	close_fd(fp_from);
+	close_fd(fp_to);
 	return (0);
 }
 
@@ -55,7 +49,7 @@ int main(int argc, char *argv[])
  */
 void file_from_error(char *s)
 {
-	fprintf(stderr, "Error: Can't read from file %s\n", s);
+	dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", s);
 	exit(98);
 }
 
@@ -65,16 +59,21 @@ void file_from_error(char *s)
  */
 void file_to_error(char *s)
 {
-	fprintf(stderr, "Error: Can't write to %s\n", s);
+	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", s);
 	exit(99);
 }
 
 /**
- * close_error - Prints error message when closing file and exit 100
- * @n: File descriptor
+ * close_fd - Closes, prints error message if closing fails file and exit 100
+ * @fd: File descriptor
  */
-void close_error(int n)
+void close_fd(int fd)
 {
-	fprintf(stderr, "Error: Can't close fd %d\n", n);
-	exit(100);
+	int c = close(fd);
+
+	if (c == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
 }
