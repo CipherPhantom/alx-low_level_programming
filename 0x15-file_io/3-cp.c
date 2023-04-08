@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
 	char *file_from, *file_to, str[1024] = {0};
-	int fp_from, fp_to, fp1_from, fp1_to, fp2_from, fp2_to;
+	int fp_from, fp_to, fp1_from, fp1_to;
 
 	if (argc != 3)
 	{
