@@ -6,12 +6,14 @@
  */
 void print_binary(unsigned long int n)
 {
-	unsigned long int num;
-	int c, i = 0;
+	unsigned long int num = n;
+	int i = 0;
 
 	if (n == 0)
+	{
 		_putchar('0');
-	num = n;
+		return;
+	}
 	while (num != 0)
 	{
 		num = num >> 1;
@@ -20,9 +22,7 @@ void print_binary(unsigned long int n)
 	while (i > 0)
 	{
 		num = n >> (i - 1);
-		c = n - (num << (i - 1));
-		_putchar(num + '0');
-		n = c;
+		_putchar((num & 1) + '0');
 		i--;
 	}
 }
