@@ -20,19 +20,16 @@ int main(int argc, char *argv[])
 
 	file_from = argv[1];
 	file_to = argv[2];
-	
+
 	str = malloc(1024 * sizeof(char));
 	if (!str)
 		file_to_error(file_to, str);
-
 	fp_from = open(file_from, O_RDONLY);
 	if (fp_from == -1)
 		file_from_error(file_from, str);
-
 	fp_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fp_to == -1)
 		file_to_error(file_to, str);
-	
 	fp1_from = read(fp_from, str, 1024);
 	if (fp1_from == -1)
 		file_from_error(file_from, str);
@@ -40,16 +37,13 @@ int main(int argc, char *argv[])
 		fp1_to = write(fp_to, str, fp1_from);
 		if (fp1_to == -1)
 			file_to_error(file_to, str);
-		
 		fp1_from = read(fp_from, str, 1024);
 		if (fp1_from == -1)
 			file_from_error(file_from, str);
-
 		fp_to = open(file_to, O_WRONLY | O_APPEND);
 		if (fp_to == -1)
 			file_to_error(file_to, str);
 	} while (fp1_from > 0);
-
 	free(str);
 	close_fd(fp_from);
 	close_fd(fp_to);
