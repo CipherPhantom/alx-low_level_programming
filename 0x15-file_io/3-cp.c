@@ -9,50 +9,38 @@
  */
 int main(int argc, char *argv[])
 {
-	char *file_from, *file_to, *str;
-	int fp_from, fp_to, fp1_from, fp1_to;
+	char *buffer;
+	int o_from, o_to, r_from, w_to;
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-
-	file_from = argv[1];
-	file_to = argv[2];
 	
-	str = malloc(1024 * sizeof(char));
-	if (!str)
-		file_to_error(file_to, str);
+	buffer = malloc(1024 * sizeof(char));
+	if (!buffer)
+		file_to_error(argv[2], buffer);
 
-	fp_from = open(file_from, O_RDONLY);
-	if (fp_from == -1)
-		file_from_error(file_from, str);
+	o_from = open(argv[1], O_RDONLY);
+	o_to = creat(argv[2], 0664);
+	r_from = read(o_from, buffer, 1024);
 
-	fp_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (fp_to == -1)
-		file_to_error(file_to, str);
-	
-	fp1_from = read(fp_from, str, 1024);
-	if (fp1_from == -1)
-		file_from_error(file_from, str);
 	do {
-		fp1_to = write(fp_to, str, 1024);
-		if (fp1_to == -1)
-			file_to_error(file_to, str);
-		
-		fp1_from = read(fp_from, str, 1024);
-		if (fp1_from == -1)
-			file_from_error(file_from, str);
+		if (o_from == -1 || r_from == -1)
+			file_from_error(argv[1], buffer);
 
-		fp_to = open(file_to, O_WRONLY | O_APPEND);
-		if (fp_to == -1)
-			file_to_error(file_to, str);
-	} while (fp1_from > 0);
+		w_to = write(o_to, buffer, 1024);
+		if (w_to == -1 || o_to == -1)
+			file_to_error(argv[2], buffer);
 
-	free(str);
-	close_fd(fp_from);
-	close_fd(fp_to);
+		r_from = read(o_from, buffer, 1024);
+		o_to = open(argv[2], O_WRONLY | O_APPEND);
+	} while (r_from > 0);
+
+	free(buffer);
+	close_fd(o_from);
+	close_fd(o_to);
 	return (0);
 }
 
