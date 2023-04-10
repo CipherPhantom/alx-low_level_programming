@@ -198,7 +198,7 @@ void get_os(ElfW(Ehdr) hdr)
 			printf("Standalone App\n");
 			break;
 		default:
-			printf("<unknown: %x>\n", e_ident[EI_OSABI]);
+			printf("<unknown: %x>\n", hdr.e_ident[EI_OSABI]);
 			break;
 	}
 }
