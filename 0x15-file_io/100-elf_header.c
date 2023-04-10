@@ -22,7 +22,14 @@ void get_entry(ElfW(Ehdr) hdr);
 unsigned long int reverse_bit32(unsigned long int x);
 unsigned long int reverse_bit64(unsigned long int x);
 
-
+/**
+ * main - Displays the information contained in the
+ *	  ELF header at the start of an ELF file.
+ * @argc: Argument Count
+ * @argv: Argument Vector
+ *
+ * Return: 0 for success
+ */
 int main(int argc, char *argv[])
 {
 	ElfW(Ehdr) header;
@@ -35,6 +42,12 @@ int main(int argc, char *argv[])
 	}
 	o = open(argv[1], O_RDONLY);
 	r = read(o, &header, sizeof(header));
+	if (header.e_type != 0x7f && header.e_ident[1] != 'E' &&
+			header.e_ident[2] != 'L' && header.e_ident[3] != 'F')
+	{
+		dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
+		exit(98);
+	}
 	if (o == -1 || r == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read %s\n", argv[1]);
@@ -58,32 +71,32 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
+/**
+ * get_magic - Prints magic number of ELF file
+ * @hdr: ELF struct
+ */
 void get_magic(ElfW(Ehdr) hdr)
 {
-	char hex[2] = {0}, c;
-	unsigned int i = 0, num;
+	unsigned int i = 0;
 
 	printf("  Magic:   ");
-	while (i < 16)
+	while (i <  EI_NIDENT)
 	{
-		num = hdr.e_ident[i];
-		sprintf(hex, "%x", num);
-		if (!hex[1])
-		{
-			c = hex[0];
-			hex[0] = '0';
-			hex[1] = c;
-		}
-		printf("%s", hex);
-		if (i < 15)
+		printf("%02x", hdr.e_ident[i]);
+		if (i <  EI_NIDENT - 1)
 			printf(" ");
 		i++;
 	}
 	printf("\n");
 }
+
+/**
+ * get_class - Prints class of ELF file
+ * @hdr: ELF struct
+ */
 void get_class(ElfW(Ehdr) hdr)
 {
-	printf("  Class:\t\t\t     ");
+	printf("  Class:                             ");
 	switch (hdr.e_ident[EI_CLASS])
 	{
 		case ELFCLASS32:
@@ -93,21 +106,26 @@ void get_class(ElfW(Ehdr) hdr)
 			printf("ELF64\n");
 			break;
 		case ELFCLASSNONE:
-			printf("None\n");
+			printf("none\n");
 			break;
 		default:
-			printf("<unknown %x>\n", hdr.e_ident[EI_CLASS]);
+			printf("<unknown: %x>\n", hdr.e_ident[EI_CLASS]);
 			break;
 	}
 
 }
+
+/**
+ * get_data - Prints data of ELF file
+ * @hdr: ELF struct
+ */
 void get_data(ElfW(Ehdr) hdr)
 {
-	printf("  Data:\t\t\t\t     ");
+	printf("  Data:                              ");
 	switch (hdr.e_ident[EI_DATA])
 	{
 		case ELFDATANONE:
-			printf("None\n");
+			printf("none\n");
 			break;
 		case ELFDATA2LSB:
 			printf("2's complement, little endian\n");
@@ -116,33 +134,40 @@ void get_data(ElfW(Ehdr) hdr)
 			printf("2's complement, big endian\n");
 			break;
 		default:
-			printf("<unknown %x>\n", hdr.e_ident[EI_CLASS]);
+			printf("<unknown: %x>\n", hdr.e_ident[EI_DATA]);
 			break;
 
 	}
 }
+
+/**
+ * get_version - Prints version of ELF file
+ * @hdr: ELF struct
+ */
 void get_version(ElfW(Ehdr) hdr)
 {
-	printf("  Version:\t\t\t     ");
-	switch (hdr.e_version)
+	printf("  Version:                           ");
+	switch (hdr.e_ident[EI_VERSION])
 	{
-		case EV_NONE:
-			printf("None\n");
-			break;
 		case EV_CURRENT:
-			printf("%x (current)\n", hdr.e_version);
+			printf("%d (current)\n", hdr.e_ident[EI_VERSION]);
 			break;
 		default:
-			printf("<unknown %x>\n", hdr.e_version);
+			printf("%d\n", hdr.e_ident[EI_VERSION]);
 			break;
 	}
 }
+
+/**
+ * get_os - Prints os of ELF file
+ * @hdr: ELF struct
+ */
 void get_os(ElfW(Ehdr) hdr)
 {
-	printf("  OS/ABI:\t\t\t     ");
+	printf("  OS/ABI:                            ");
 	switch (hdr.e_ident[EI_OSABI])
 	{
-		case ELFOSABI_SYSV:
+		case ELFOSABI_NONE:
 			printf("UNIX - System V\n");
 			break;
 		case ELFOSABI_HPUX:
@@ -155,53 +180,52 @@ void get_os(ElfW(Ehdr) hdr)
 			printf("UNIX - Linux\n");
 			break;
 		case ELFOSABI_SOLARIS:
-			printf("UNIX - Sun Solaris\n");
-			break;
-		case ELFOSABI_AIX:
-			printf("UNIX - IBM AIX\n");
+			printf("UNIX - Solaris\n");
 			break;
 		case ELFOSABI_IRIX:
-			printf("UNIX - SGI Irix\n");
+			printf("UNIX - IRIX\n");
 			break;
 		case ELFOSABI_FREEBSD:
 			printf("UNIX - FreeBSD\n");
 			break;
 		case ELFOSABI_TRU64:
-			printf("UNIX - Compaq TRU64 UNIX\n");
-			break;
-		case ELFOSABI_MODESTO:
-			printf("UNIX - Novell Modesto\n");
-			break;
-		case ELFOSABI_OPENBSD:
-			printf("UNIX - OpenBSD\n");
-			break;
-		case ELFOSABI_ARM_AEABI:
-			printf("UNIX - ARM EABI\n");
+			printf("UNIX - TRU64\n");
 			break;
 		case ELFOSABI_ARM:
-			printf("UNIX - ARM\n");
+			printf("ARM\n");
 			break;
 		case ELFOSABI_STANDALONE:
-			printf("UNIX - Standalone (embedded)\n");
+			printf("Standalone App\n");
 			break;
 		default:
-			printf("<unknown %x>\n", hdr.e_ident[EI_OSABI]);
+			printf("<unknown: %x>\n", e_ident[EI_OSABI]);
 			break;
 	}
-
 }
+
+/**
+ * get_abi - Prints abi of ELF file
+ * @hdr: ELF struct
+ */
 void get_abi(ElfW(Ehdr) hdr)
 {
-	printf("  ABI Version:\t\t\t     ");
-	printf("%x\n", hdr.e_ident[EI_ABIVERSION]);
+	printf("  ABI Version:                       ");
+	printf("%d\n", hdr.e_ident[EI_ABIVERSION]);
 }
+
+/**
+ * get_type - Prints type of ELF file
+ * @hdr: ELF struct
+ */
 void get_type(ElfW(Ehdr) hdr)
 {
-	printf("  Type:\t\t\t\t     ");
+	if (hdr.e_ident[EI_DATA] == ELFDATA2MSB)
+		hdr.e_type >>= 8;
+	printf("  Type:                              ");
 	switch (hdr.e_type)
 	{
 		case ET_NONE:
-			printf("None\n");
+			printf("NONE (None)\n");
 			break;
 		case ET_REL:
 			printf("REL (Relocatable file)\n");
@@ -220,11 +244,16 @@ void get_type(ElfW(Ehdr) hdr)
 			break;
 	}
 }
+
+/**
+ * get_entry - Prints entry of ELF file
+ * @hdr: ELF struct
+ */
 void get_entry(ElfW(Ehdr) hdr)
 {
 	unsigned long int num = hdr.e_entry;
 
-	printf("  Entry point address:\t\t     ");
+	printf("  Entry point address:               ");
 	if (hdr.e_ident[EI_DATA] == ELFDATA2MSB)
 	{
 		num = ((num << 8) & 0xFF00FF00) | ((num >> 8) & 0xFF00FF);
