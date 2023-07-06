@@ -16,10 +16,7 @@ hash_node_t *create_node(const char *key, const char *value)
 	if (!node)
 		return (NULL);
 	node->key = strdup(key);
-	if (value)
-		node->value = strdup(value);
-	else
-		node->value = NULL;
+	node->value = strdup(value);
 	node->next = NULL;
 	return (node);
 }
@@ -38,7 +35,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	unsigned long int index;
 	hash_node_t *node, *current = NULL;
 
-	if (!ht || !key || strlen(key) == 0)
+	if (!ht || !key || strlen(key) == 0 || !value)
 		return (0);
 	index = key_index((unsigned char *)key, ht->size);
 	node = create_node(key, value);
