@@ -20,6 +20,7 @@ void hash_table_print(const hash_table_t *ht)
 		tmp = ht->array[i];
 		if (tmp)
 			indexFound = 1;
+
 		while (tmp)
 		{
 			printf("'%s': '%s'", tmp->key, tmp->value);
@@ -27,6 +28,7 @@ void hash_table_print(const hash_table_t *ht)
 			if (tmp)
 				printf(", ");
 		}
+
 		if (ht->array[i + 1] && indexFound)
 			printf(", ");
 		i++;
