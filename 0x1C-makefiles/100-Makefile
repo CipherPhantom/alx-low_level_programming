@@ -1,14 +1,12 @@
 CC = gcc
 SRC = main.c school.c
-OBJ = $(patsubst %.c, %.o, $(SRC))
+OBJ = $(SRC:.c=.o)
 NAME = school
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
--include: m.h
-
 .PHONY: all clean oclean flean re
 
-all: $(OBJ)
+all: m.h $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
 clean:
